@@ -1,0 +1,61 @@
+<nav class="navbar navbar-inverse" style="background: #2e363f;">
+  <div class="container-fluid">
+
+    <ul class="nav navbar-nav">
+      <li class="active">
+        <img class="img-logo" src="assets/img/url.png">
+      </li>
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <span class="btn username-text ">{{currentUser.fullName}}</span>
+        <a href="" class="btn btn-link" (click)="logOut()">
+          LogOut
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container" style="text-align: center; width: 80%;">
+  <form name="form-signin" (ngSubmit)="shorten()" style="margin-top: 1em;">
+    <div class="input-group">
+      <input type="text" class="form-control shorten-url" placeholder="Enter the link here" id="full_url" name="full_url" [(ngModel)]="url.longUrl"
+        #longUrl="ngModel" autocomplete="off">
+      <div class="input-group-append">
+        <button class="btn btn-shorten" type="submit">SHORTEN</button>
+      </div>
+    </div>
+
+  </form>
+  <div class="alert alert-danger" role="alert" *ngIf="errorMessage">{{errorMessage}}</div>
+  <div class="my-4 shorten-box-home" style="min-height: 100px;">
+    <div class="row">
+      <a href="{{unauthUrl}}" class="" style="display: inline-block;">{{unauthUrl}}</a>
+    </div>
+    <br>
+    <div class="row">
+      <a href="{{url.shortUrl}}" class="btn-link" style="display: inline-block;">{{url.shortUrl}}</a>
+    </div>
+  </div>
+  <h2>URL History</h2>
+  <div class="col-md-12" style="text-align: left;">
+ 
+      <table class="table table-striped">
+          <thead>
+              <tr>
+                  <th>Long URL</th>
+                  <th>Short URL</th>
+                  <th>Create Date</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let each of urls">
+                  <td>{{each.longUrl}}</td>
+                  <td>{{each.shortUrl}}</td>
+                  <td>{{each.createdDate | date:'d/MM/yyyy hh:mm:ss'}}</td>
+              </tr>
+          </tbody>
+      </table>
+</div>
